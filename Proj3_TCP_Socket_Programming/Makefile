@@ -1,12 +1,11 @@
-TARGETS=ringmaster player
+all: ringmaster player
 
-all: $(TARGETS)
+ringmaster: ringmaster.cpp function.cpp 
+	g++ -g -o ringmaster ringmaster.cpp function.cpp
+player: player.cpp function.cpp
+	g++ -g -o player player.cpp function.cpp
+
+.PHONY:
+	clean
 clean:
-	rm -f $(TARGETS)
-
-player: player.cpp
-	g++ -g -o $@ $<
-
-ringmaster: ringmaster.cpp
-	g++ -g -o $@ $<
-
+	rm -rf *.o ringmaster player
