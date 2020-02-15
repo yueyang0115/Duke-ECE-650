@@ -11,11 +11,10 @@
 using namespace std;
 
 int main(int argc, char * argv[]) {
-  const char * hostname = NULL;
   const char * port = "4444";
   vector<int> all_player_fd;
 
-  int socket_fd = build_server(hostname, port);
+  int socket_fd = build_server(port);
   int num_players = 3;
   for (int i = 0; i < num_players; i++) {
     int player_connect_fd = server_accept(socket_fd);

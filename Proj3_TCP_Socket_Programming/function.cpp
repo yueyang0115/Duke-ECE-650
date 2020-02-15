@@ -10,7 +10,8 @@
 
 using namespace std;
 
-int build_server(const char * hostname, const char * port) {
+int build_server(const char * port) {
+  const char * hostname = NULL;
   struct addrinfo host_info;
   struct addrinfo * host_info_list;
   int status;
@@ -76,8 +77,6 @@ int build_client(const char * hostname, const char * port) {
   host_info.ai_socktype = SOCK_STREAM;
 
   status = getaddrinfo(hostname, port, &host_info, &host_info_list);
-  cout << "hostname :" << hostname << endl;
-  cout << "port: " << port << endl;
   if (status != 0) {
     cerr << "Error: cannot get address info for host" << endl;
     cerr << "  (" << hostname << "," << port << ")" << endl;
