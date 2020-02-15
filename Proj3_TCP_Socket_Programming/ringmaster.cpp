@@ -18,13 +18,18 @@ int main(int argc, char * argv[]) {
 
   int socket_fd = build_server(master_port);
   int num_players = 3;
+
   for (int i = 0; i < num_players; i++) {
     int player_port;
     string player_ip;
+    //master accept player's connection and get its ip
     int player_connect_fd = server_accept(socket_fd, &player_ip);
 
+    //master send player id & nun_players
     send(player_connect_fd, &i, sizeof(i), 0);
     send(player_connect_fd, &num_players, sizeof(num_players), 0);
+
+    //master receive player's port
     recv(player_connect_fd, &player_port, sizeof(player_port), 0);
 
     all_player_fd.push_back(player_connect_fd);
@@ -35,6 +40,7 @@ int main(int argc, char * argv[]) {
               << ", port is " << player_port << endl;
   }
 
+  //master send player its neighbor's ip & port
   for (int i = 0; i < num_players; i++) {
     int neighbor_id = (i + 1) % num_players;
     int neighbor_port = all_player_port[neighbor_id];
