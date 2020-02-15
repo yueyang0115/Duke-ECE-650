@@ -1,11 +1,14 @@
+#include "function.h"
+
 #include <netdb.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
 #include <cstring>
 #include <iostream>
+
 using namespace std;
-#include "function.h"
 
 int build_server(const char * hostname, const char * port) {
   struct addrinfo host_info;
@@ -19,10 +22,17 @@ int build_server(const char * hostname, const char * port) {
   host_info.ai_flags = AI_PASSIVE;
 
   status = getaddrinfo(hostname, port, &host_info, &host_info_list);
+  //cout << "hostname :" << hostname << endl;
+  //cout << "port: " << port << endl;
   if (status != 0) {
     cerr << "Error: cannot get address info for host" << endl;
     cerr << "  (" << hostname << "," << port << ")" << endl;
     exit(EXIT_FAILURE);
+  }
+
+  if (strcmp(port, "") == 0) {
+    struct sockaddr_in * addr_in = (struct sockaddr_in *)(host_info_list->ai_addr);
+    addr_in->sin_port = 0;
   }
 
   socket_fd = socket(host_info_list->ai_family,
@@ -66,6 +76,8 @@ int build_client(const char * hostname, const char * port) {
   host_info.ai_socktype = SOCK_STREAM;
 
   status = getaddrinfo(hostname, port, &host_info, &host_info_list);
+  cout << "hostname :" << hostname << endl;
+  cout << "port: " << port << endl;
   if (status != 0) {
     cerr << "Error: cannot get address info for host" << endl;
     cerr << "  (" << hostname << "," << port << ")" << endl;
@@ -97,13 +109,22 @@ int build_client(const char * hostname, const char * port) {
 int server_accept(int socket_fd) {
   struct sockaddr_storage socket_addr;
   socklen_t socket_addr_len = sizeof(socket_addr);
-  int client_connection_fd;
+  int client_connect_fd;
 
-  client_connection_fd =
+  client_connect_fd =
       accept(socket_fd, (struct sockaddr *)&socket_addr, &socket_addr_len);
-  if (client_connection_fd == -1) {
+  if (client_connect_fd == -1) {
     cerr << "Error: cannot accept connection on socket" << endl;
     exit(EXIT_FAILURE);
   }
-  return client_connection_fd;
+  return client_connect_fd;
+}
+
+int get_port_num(int socket_fd) {
+  struct sockaddr_in sin;
+  socklen_t len = sizeof(sin);
+  if (getsockname(socket_fd, (struct sockaddr *)&sin, &len) == -1) {
+    cerr << "getsockname" << endl;
+  }
+  return ntohs(sin.sin_port);
 }

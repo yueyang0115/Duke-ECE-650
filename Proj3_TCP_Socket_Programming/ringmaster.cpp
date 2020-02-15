@@ -4,26 +4,28 @@
 
 #include <cstring>
 #include <iostream>
+#include <vector>
 
 #include "function.h"
 
 using namespace std;
 
 int main(int argc, char * argv[]) {
-  int socket_fd;
   const char * hostname = NULL;
   const char * port = "4444";
+  vector<int> all_player_fd;
 
-  socket_fd = build_server(hostname, port);
+  int socket_fd = build_server(hostname, port);
   int num_players = 3;
   for (int i = 0; i < num_players; i++) {
-    int client_connection_fd = server_accept(socket_fd);
+    int player_connect_fd = server_accept(socket_fd);
+    all_player_fd.push_back(player_connect_fd);
 
-    send(client_connection_fd, &i, sizeof(i), 0);
-    send(client_connection_fd, &num_players, sizeof(num_players), 0);
+    send(player_connect_fd, &i, sizeof(i), 0);
+    send(player_connect_fd, &num_players, sizeof(num_players), 0);
 
     int port;
-    recv(client_connection_fd, &port, sizeof(port), 0);
+    recv(player_connect_fd, &port, sizeof(port), 0);
     std::cout << "Player " << i << " is ready to play, port is " << port << " \n";
   }
 
