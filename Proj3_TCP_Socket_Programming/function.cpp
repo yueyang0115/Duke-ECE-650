@@ -1,5 +1,6 @@
 #include "function.h"
 
+#include <arpa/inet.h>
 #include <netdb.h>
 #include <string.h>
 #include <sys/socket.h>
@@ -105,7 +106,7 @@ int build_client(const char * hostname, const char * port) {
   return socket_fd;
 }
 
-int server_accept(int socket_fd) {
+int server_accept(int socket_fd, string * ip) {
   struct sockaddr_storage socket_addr;
   socklen_t socket_addr_len = sizeof(socket_addr);
   int client_connect_fd;
@@ -116,6 +117,10 @@ int server_accept(int socket_fd) {
     cerr << "Error: cannot accept connection on socket" << endl;
     exit(EXIT_FAILURE);
   }
+
+  struct sockaddr_in * addr = (struct sockaddr_in *)&socket_addr;
+  *ip = inet_ntoa(addr->sin_addr);
+
   return client_connect_fd;
 }
 
@@ -123,7 +128,8 @@ int get_port_num(int socket_fd) {
   struct sockaddr_in sin;
   socklen_t len = sizeof(sin);
   if (getsockname(socket_fd, (struct sockaddr *)&sin, &len) == -1) {
-    cerr << "getsockname" << endl;
+    cerr << "Error: cannot getsockname" << endl;
+    exit(EXIT_FAILURE);
   }
   return ntohs(sin.sin_port);
 }

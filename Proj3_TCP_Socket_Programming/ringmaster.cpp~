@@ -36,12 +36,6 @@ int main(int argc, char * argv[]) {
   }
 
   for (int i = 0; i < num_players; i++) {
-    int neighbor_id = (i + 1) % num_players;
-    int neighbor_port = all_player_port[neighbor_id];
-    char neighbor_ip[100];
-    strcpy(neighbor_ip, all_player_ip[neighbor_id].c_str());
-    send(all_player_fd[i], &neighbor_port, sizeof(neighbor_port), 0);
-    send(all_player_fd[i], &neighbor_ip, sizeof(neighbor_ip), 0);
   }
 
   close(socket_fd);
