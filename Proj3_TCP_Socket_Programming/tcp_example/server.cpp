@@ -33,7 +33,8 @@ int main(int argc, char *argv[])
 		     host_info_list->ai_socktype, 
 		     host_info_list->ai_protocol);
   //creates an endpoint for communication and returns a descriptor
-  
+  //return value is a descriptor referencing the socket.
+
   if (socket_fd == -1) {
     cerr << "Error: cannot create socket" << endl;
     cerr << "  (" << hostname << "," << port << ")" << endl;
@@ -42,7 +43,7 @@ int main(int argc, char *argv[])
 
   int yes = 1;
   status = setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));  
-  //manipulate the options associated with a socket.
+  //allow address reuse
   status = bind(socket_fd, host_info_list->ai_addr, host_info_list->ai_addrlen);
   if (status == -1) {
     cerr << "Error: cannot bind socket" << endl;
@@ -59,7 +60,7 @@ int main(int argc, char *argv[])
   } //if
 
   cout << "Waiting for connection on port " << port << endl;
-  struct sockaddr_storage socket_addr;
+  struct sockaddr_storage socket_addr;   
   socklen_t socket_addr_len = sizeof(socket_addr);
   int client_connection_fd;
   client_connection_fd = accept(socket_fd, (struct sockaddr *)&socket_addr, &socket_addr_len);

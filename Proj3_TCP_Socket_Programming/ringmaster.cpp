@@ -73,6 +73,7 @@ int main(int argc, char * argv[]) {
     //send potato to first player
     srand((unsigned int)time(NULL) + num_players);
     int random = rand() % num_players;
+    //cout << "random=" << random << endl;
     send(all_player_fd[random], &potato, sizeof(potato), 0);
     cout << "Ready to start the game, sending potato to player " << random << endl;
 
@@ -99,8 +100,6 @@ int main(int argc, char * argv[]) {
     for (int i = 0; i < num_players; i++) {
       send(all_player_fd[i], &potato, sizeof(potato), 0);
     }
-
-    //print potato trace
     cout << "Trace of potato:" << endl;
     for (int i = 0; i < potato.count; i++) {
       cout << potato.path[i];
@@ -112,12 +111,11 @@ int main(int argc, char * argv[]) {
       }
     }
   }
-  sleep(1);
 
+  sleep(1);
   for (int i = 0; i < num_players; i++) {
     close(all_player_fd[i]);
   }
   close(socket_fd);
-
   return 0;
 }

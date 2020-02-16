@@ -59,6 +59,7 @@ int main(int argc, char * argv[]) {
   vector<int> all_connected_fd{right_neighbor_fd, left_neighbor_fd, master_fd};
   fd_set readfds;
   int nfds = *max_element(all_connected_fd.begin(), all_connected_fd.end());
+  srand((unsigned int)time(NULL) + player_id);
 
   //receive potato
   while (1) {
@@ -94,8 +95,8 @@ int main(int argc, char * argv[]) {
     }
 
     //send potato to neighbor
-    srand((unsigned int)time(NULL) + player_id);
     int random = rand() % 2;
+    //cout << "random==" << random << endl;
     if (random == 0) {
       send(left_neighbor_fd, &potato, sizeof(potato), 0);
       int left_neighbor_id = (player_id + num_players - 1) % num_players;
@@ -107,6 +108,7 @@ int main(int argc, char * argv[]) {
       cout << "Sending potato to " << right_neighbor_id << endl;
     }
   }
+
   sleep(1);
   close(left_neighbor_fd);
   close(right_neighbor_fd);

@@ -35,6 +35,9 @@ int main(int argc, char *argv[])
   socket_fd = socket(host_info_list->ai_family, 
 		     host_info_list->ai_socktype, 
 		     host_info_list->ai_protocol);
+   //creates an endpoint for communication and returns a descriptor
+   //return value is a descriptor referencing the socket.
+
   if (socket_fd == -1) {
     cerr << "Error: cannot create socket" << endl;
     cerr << "  (" << hostname << "," << port << ")" << endl;
@@ -44,6 +47,8 @@ int main(int argc, char *argv[])
   cout << "Connecting to " << hostname << " on port " << port << "..." << endl;
   
   status = connect(socket_fd, host_info_list->ai_addr, host_info_list->ai_addrlen);
+  //stream sockets may successfully connect() only once; Y
+  //datagram sockets may use connect() multiple times to change their association.
   if (status == -1) {
     cerr << "Error: cannot connect to socket" << endl;
     cerr << "  (" << hostname << "," << port << ")" << endl;
