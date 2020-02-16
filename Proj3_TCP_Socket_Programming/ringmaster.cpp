@@ -71,6 +71,7 @@ int main(int argc, char * argv[]) {
   }
   else {
     //send potato to first player
+    srand((unsigned int)time(NULL) + num_players);
     int random = rand() % num_players;
     send(all_player_fd[random], &potato, sizeof(potato), 0);
     cout << "Ready to start the game, sending potato to player " << random << endl;
