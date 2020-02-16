@@ -24,8 +24,6 @@ int build_server(const char * port) {
   host_info.ai_flags = AI_PASSIVE;
 
   status = getaddrinfo(hostname, port, &host_info, &host_info_list);
-  //cout << "hostname :" << hostname << endl;
-  //cout << "port: " << port << endl;
   if (status != 0) {
     cerr << "Error: cannot get address info for host" << endl;
     cerr << "  (" << hostname << "," << port << ")" << endl;
@@ -62,7 +60,7 @@ int build_server(const char * port) {
     exit(EXIT_FAILURE);
   }
 
-  cout << "Waiting for connection on port " << port << endl;
+  //cout << "Waiting for connection on port " << port << endl;
   freeaddrinfo(host_info_list);
   return socket_fd;
 }
@@ -93,7 +91,7 @@ int build_client(const char * hostname, const char * port) {
     exit(EXIT_FAILURE);
   }
 
-  cout << "Connecting to " << hostname << " on port " << port << "..." << endl;
+  //cout << "Connecting to " << hostname << " on port " << port << "..." << endl;
 
   status = connect(socket_fd, host_info_list->ai_addr, host_info_list->ai_addrlen);
   if (status == -1) {
