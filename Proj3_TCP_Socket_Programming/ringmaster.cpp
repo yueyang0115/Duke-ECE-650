@@ -63,17 +63,10 @@ int main(int argc, char * argv[]) {
   //begin playing
   Potato potato;
   potato.num_hops = num_hops;
-  if (num_hops == 0) {
-    //send potato with num_hops 0 to all players to shut down
-    for (int i = 0; i < num_players; i++) {
-      send(all_player_fd[i], &potato, sizeof(potato), 0);
-    }
-  }
-  else {
-    //send potato to first player
+
+  if (num_hops != 0) {  //send potato to first player
     srand((unsigned int)time(NULL) + num_players);
     int random = rand() % num_players;
-    //cout << "random=" << random << endl;
     send(all_player_fd[random], &potato, sizeof(potato), 0);
     cout << "Ready to start the game, sending potato to player " << random << endl;
 
@@ -81,38 +74,33 @@ int main(int argc, char * argv[]) {
     fd_set readfds;
     int nfds = *max_element(all_player_fd.begin(), all_player_fd.end());
     FD_ZERO(&readfds);
-
     for (int i = 0; i < num_players; i++) {
       FD_SET(all_player_fd[i], &readfds);
     }
-    int status = select(nfds + 1, &readfds, NULL, NULL, NULL);
-    if (status != 1) {
-      cerr << "Error: select error or timed out" << endl;
-    }
+    select(nfds + 1, &readfds, NULL, NULL, NULL);
     for (int i = 0; i < num_players; i++) {
       if (FD_ISSET(all_player_fd[i], &readfds)) {
         recv(all_player_fd[i], &potato, sizeof(potato), MSG_WAITALL);
         break;
       }
     }
+  }
 
-    //send potato with num_hops 0 to all players to shut down
-    for (int i = 0; i < num_players; i++) {
-      send(all_player_fd[i], &potato, sizeof(potato), 0);
+  //send potato with num_hops 0 to all players to shut down
+  for (int i = 0; i < num_players; i++) {
+    send(all_player_fd[i], &potato, sizeof(potato), 0);
+  }
+  cout << "Trace of potato:" << endl;
+  for (int i = 0; i < potato.count; i++) {
+    cout << potato.path[i];
+    if (i != potato.count - 1) {
+      cout << ",";
     }
-    cout << "Trace of potato:" << endl;
-    for (int i = 0; i < potato.count; i++) {
-      cout << potato.path[i];
-      if (i != potato.count - 1) {
-        cout << ",";
-      }
-      else {
-        cout << endl;
-      }
+    else {
+      cout << endl;
     }
   }
 
-  sleep(1);
   for (int i = 0; i < num_players; i++) {
     close(all_player_fd[i]);
   }

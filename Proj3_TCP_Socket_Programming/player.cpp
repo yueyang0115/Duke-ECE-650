@@ -67,52 +67,48 @@ int main(int argc, char * argv[]) {
     for (int i = 0; i < 3; i++) {
       FD_SET(all_connected_fd[i], &readfds);
     }
-    int status = select(nfds + 1, &readfds, NULL, NULL, NULL);
-    if (status != 1) {
-      cerr << "Error: select error or timed out" << endl;
-    }
+    select(nfds + 1, &readfds, NULL, NULL, NULL);
+    int len;
     for (int i = 0; i < 3; i++) {
       if (FD_ISSET(all_connected_fd[i], &readfds)) {
-        recv(all_connected_fd[i], &potato, sizeof(potato), MSG_WAITALL);
+        len = recv(all_connected_fd[i], &potato, sizeof(potato), MSG_WAITALL);
         break;
       }
     }
 
-    //receive num_hops =0 potato from master, shut down
-    if (potato.num_hops == 0) {
+    //receive num_hops =0 potato from master or shut down signal 0 from other socket, shut down
+    if (potato.num_hops == 0 || len == 0) {
       break;
     }
-    potato.num_hops--;
-    potato.path[potato.count] = player_id;
-    potato.count++;
-
     //send potato to master
-    if (potato.num_hops == 0) {
+    else if (potato.num_hops == 1) {
+      potato.num_hops--;
+      potato.path[potato.count] = player_id;
+      potato.count++;
       send(master_fd, &potato, sizeof(potato), 0);
       cout << "I'm it" << endl;
-      continue;
-      //break;
     }
-
     //send potato to neighbor
-    int random = rand() % 2;
-    //cout << "random==" << random << endl;
-    if (random == 0) {
-      send(left_neighbor_fd, &potato, sizeof(potato), 0);
-      int left_neighbor_id = (player_id + num_players - 1) % num_players;
-      cout << "Sending potato to " << left_neighbor_id << endl;
-    }
     else {
-      send(right_neighbor_fd, &potato, sizeof(potato), 0);
-      int right_neighbor_id = (player_id + 1) % num_players;
-      cout << "Sending potato to " << right_neighbor_id << endl;
+      potato.num_hops--;
+      potato.path[potato.count] = player_id;
+      potato.count++;
+      int random = rand() % 2;
+      if (random == 0) {
+        send(left_neighbor_fd, &potato, sizeof(potato), 0);
+        int left_neighbor_id = (player_id + num_players - 1) % num_players;
+        cout << "Sending potato to " << left_neighbor_id << endl;
+      }
+      else {
+        send(right_neighbor_fd, &potato, sizeof(potato), 0);
+        int right_neighbor_id = (player_id + 1) % num_players;
+        cout << "Sending potato to " << right_neighbor_id << endl;
+      }
     }
   }
 
-  sleep(1);
   close(left_neighbor_fd);
   close(right_neighbor_fd);
-  //close(player_fd);
   close(master_fd);
   return 0;
 }
