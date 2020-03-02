@@ -1,0 +1,8 @@
+To try one of these tests, you can rename the source file you 
+want to try to test.cpp, then run build.sh to compile, and 
+run the ./test executable that is created.
+
+For example:
+mv test.1.cpp test.cpp
+./build.sh
+./test
