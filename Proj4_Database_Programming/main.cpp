@@ -7,6 +7,17 @@
 using namespace std;
 using namespace pqxx;
 
+void dropTable(connection *C){
+string sql = "DROP TABLE IF EXISTS PLAYER CASCADE;\
+DROP TABLE IF EXISTS TEAM CASCADE;\
+DROP TABLE IF EXISTS STATE CASCADE;\
+DROP TABLE IF EXISTS COLOR CASCADE;";
+ work W(*C);
+ W.exec( sql );
+ W.commit();
+ cout << "Table dropped successfully" << endl;  
+}
+
 void createTable(string file_name, connection *C){
   string sql;
   string line;
@@ -27,6 +38,30 @@ void createTable(string file_name, connection *C){
   cout << "Table created successfully" << endl;
 }
 
+void readColor(string file_name, connection *C){
+    string sql;
+  string line;
+  string name;
+  int color_id;
+  ifstream myfile (file_name.c_str());
+  if (myfile.is_open()){
+      while(getline(myfile,line)){
+	stringstream ss;
+	ss << line;
+	ss >> color_id >> name;
+	add_color(C, name);
+      }
+       myfile.close();
+  }
+  else{
+    cout << "Unable to open file"<<endl;
+    return;
+  }
+  work W(*C);
+  W.exec( sql );
+  W.commit();
+  cout << "Table created successfully" << endl;
+}
 int main (int argc, char *argv[]) 
 {
   //Allocate & initialize a Postgres connection object
@@ -47,6 +82,7 @@ int main (int argc, char *argv[])
 
   //TODO: create PLAYER, TEAM, STATE, and COLOR tables in the ACC_BBALL database
   //      load each table with rows from the provided source txt files
+  dropTable(C);
   createTable("tables.sql",C);
   //exercise(C);
 
