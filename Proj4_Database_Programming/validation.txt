@@ -327,7 +327,7 @@ Marques Bolden 20
 Justin Robinson 50
 Nick Pagliuca 45
 Brennan Besser 53
-FIRST_NAME LAST_NAME NAME WINS
+FIRST_NAME LAST_NAME TEAM_NAME WINS
 Jonathan Radner UNC 14
 Evan Dourdas UNC 14
 Mike Sutton UNC 14
@@ -575,7 +575,7 @@ Chris CorchianiJr. 13
 Tucker Thompson 42
 Darius Hicks 5
 Chris Brickhouse 15
-FIRST_NAME LAST_NAME NAME WINS
+FIRST_NAME LAST_NAME TEAM_NAME WINS
 Riley McGillan Clemson 6
 Lyles Davis Clemson 6
 Ty Hudson Clemson 6
@@ -873,7 +873,7 @@ Jarquez Smith 23
 Christ Koumadje 21
 Brandon Allen 40
 Phil Cofer 0
-FIRST_NAME LAST_NAME NAME WINS
+FIRST_NAME LAST_NAME TEAM_NAME WINS
 Brennan Besser Duke 11
 Nick Pagliuca Duke 11
 Justin Robinson Duke 11

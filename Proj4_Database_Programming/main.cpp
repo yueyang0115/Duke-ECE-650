@@ -16,7 +16,7 @@ void executeSQL(string sql, connection *C){
 void dropTable(connection *C, string tableName){
 string sql = "DROP TABLE IF EXISTS " + tableName + " CASCADE;";
   executeSQL(sql,C);
-  cout << "Drop table " + tableName + " successfully" << endl;  
+  // cout << "Drop table " + tableName + " successfully" << endl;  
 }
 
 void createTable(string fileName, connection *C){
@@ -34,7 +34,7 @@ void createTable(string fileName, connection *C){
     return;
   }
   executeSQL(sql,C);
-  cout << "ALL Tables created successfully" << endl;
+  //cout << "ALL Tables created successfully" << endl;
 }
 
 void insertColor(string fileName, connection *C){
@@ -55,7 +55,7 @@ void insertColor(string fileName, connection *C){
     return;
   }
   executeSQL(sql,C);
-  cout << "Insert color successfully" << endl;
+  //cout << "Insert color successfully" << endl;
 }
 
 void insertState(string fileName, connection *C){
@@ -76,7 +76,7 @@ void insertState(string fileName, connection *C){
     return;
   }
   executeSQL(sql,C);
-  cout << "Insert state successfully" << endl;
+  //cout << "Insert state successfully" << endl;
 }
 
 void insertPlayer(string fileName, connection *C){
@@ -98,7 +98,7 @@ void insertPlayer(string fileName, connection *C){
     return;
   }
   executeSQL(sql,C);
-  cout << "Insert player successfully" << endl;
+  //cout << "Insert player successfully" << endl;
 }
 
 void insertTeam(string fileName, connection *C){
@@ -119,7 +119,7 @@ void insertTeam(string fileName, connection *C){
     return;
   }
   executeSQL(sql,C);
-  cout << "Insert team successfully" << endl;
+  //cout << "Insert team successfully" << endl;
 }
 
 
@@ -129,7 +129,7 @@ int main (int argc, char *argv[])
   try{
     C = new connection("dbname=ACC_BBALL user=postgres password=passw0rd");
     if (C->is_open()) {
-      cout << "Opened database successfully: " << C->dbname() << endl;
+      //cout << "Opened database successfully: " << C->dbname() << endl;
     } else {
       cout << "Can't open database" << endl;
       return 1;
