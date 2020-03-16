@@ -1,0 +1,261 @@
+PLAYER_ID TEAM_ID UNIFORM_NUM FIRST_NAME LAST_NAME MPG PPG RPG APG SPG BPG
+30 3 5 Luke Kennard 36 20 5 3 0.8 0.4
+59 5 44 Ben Lammers 35 14 9 2 1.2 3.4
+87 7 5 Davon Reed 35 15 5 2 1.3 0.5
+98 8 4 Dennis SmithJr. 35 18 5 6 1.9 0.4
+130 10 32 Steve Vasturia 35 13 4 3 1.2 0.1
+153 12 3 Andrew WhiteIII 37 19 5 1 1.6 0.4
+154 12 20 Tyler Lydon 36 13 9 2 1.0 1.4
+PLAYER_ID TEAM_ID UNIFORM_NUM FIRST_NAME LAST_NAME MPG PPG RPG APG SPG BPG
+2 1 0 Ky Bowman 29 14 5 3 1.2 0.1
+6 1 2 Connar Tava 25 6 5 2 0.7 0.3
+7 1 15 Mo Jeffers 20 6 6 1 0.4 0.5
+16 2 5 Jaron Blossomgame 34 18 6 2 0.8 0.9
+23 2 50 Sidy Djitte 24 7 8 1 0.7 0.8
+30 3 5 Luke Kennard 36 20 5 3 0.8 0.4
+31 3 0 Jayson Tatum 33 17 7 2 1.3 1.1
+34 3 21 Amile Jefferson 30 11 8 2 0.7 1.9
+46 4 1 Jonathan Isaac 26 12 8 1 1.2 1.5
+48 4 14 Terance Mann 25 8 5 2 1.0 0.2
+58 5 5 Josh Okogie 31 16 5 2 1.3 0.7
+59 5 44 Ben Lammers 35 14 9 2 1.2 3.4
+61 5 12 Quinton Stephens 33 10 8 2 1.2 0.7
+73 6 45 Donovan Mitchell 32 16 5 3 2.1 0.5
+75 6 22 Deng Adel 30 12 5 2 0.6 0.4
+76 6 10 Jaylen Johnson 21 8 6 1 0.5 0.5
+77 6 12 Mangok Mathiang 21 8 6 1 0.5 1.1
+78 6 13 Ray Spalding 19 6 6 1 0.6 0.9
+87 7 5 Davon Reed 35 15 5 2 1.3 0.5
+89 7 11 Bruce BrownJr. 32 12 6 3 1.5 0.5
+90 7 21 Kamari Murphy 29 7 7 1 0.4 0.7
+98 8 4 Dennis SmithJr. 35 18 5 6 1.9 0.4
+101 8 0 Abdul-Malik Abu 29 12 7 1 0.4 0.9
+102 8 2 Torin Dorn 24 10 5 1 0.4 0.1
+112 9 44 Justin Jackson 32 18 5 3 0.8 0.2
+114 9 3 Kennedy Meeks 24 13 10 1 1.0 1.2
+115 9 4 Isaiah Hicks 23 12 6 1 0.4 0.7
+116 9 5 Tony Bradley 15 7 5 1 0.3 0.6
+118 9 1 Theo Pinson 24 6 5 4 0.9 0.2
+127 10 35 Bonzie Colson 32 18 10 2 1.1 1.4
+140 11 2 Mike Young 33 20 7 3 0.6 0.8
+141 11 1 Jamel Artis 34 18 5 3 0.4 0.3
+142 11 23 Cameron Johnson 33 12 5 2 0.9 0.3
+143 11 21 Sheldon Jeter 29 8 7 2 0.9 1.0
+153 12 3 Andrew WhiteIII 37 19 5 1 1.6 0.4
+154 12 20 Tyler Lydon 36 13 9 2 1.0 1.4
+158 12 32 DaJuan Coleman 16 6 5 0 0.4 0.5
+159 12 21 Tyler Roberson 20 5 5 1 0.5 0.8
+175 13 21 Isaiah Wilkins 27 7 6 1 1.0 1.3
+184 14 32 Zach LeDay 29 17 7 1 0.6 1.0
+186 14 15 Chris Clarke 29 11 7 3 1.3 0.3
+195 15 20 John Collins 27 19 10 1 0.6 1.6
+198 15 44 Konstantinos Mitoglou 25 9 6 1 0.6 0.7
+NAME
+Miami
+FIRST_NAME LAST_NAME
+FIRST_NAME LAST_NAME
+Luke Kennard
+Jayson Tatum
+Grayson Allen
+Frank Jackson
+Amile Jefferson
+Matt Jones
+Harry Giles
+Chase Jeter
+Antonio Vrankovic
+Jack White
+Javin DeLaurier
+Marques Bolden
+Justin Robinson
+Nick Pagliuca
+Brennan Besser
+FIRST_NAME LAST_NAME UNIFORM_NUM
+FIRST_NAME LAST_NAME NAME WINS
+Andrew WhiteIII UNC 14
+Tyler Lydon UNC 14
+Tyus Battle UNC 14
+John Gillon UNC 14
+Taurean Thompson UNC 14
+DaJuan Coleman UNC 14
+Tyler Roberson UNC 14
+Frank Howard UNC 14
+Paschal Chukwu UNC 14
+Ray Featherston UNC 14
+Doyin Akintobi-Adeyeye UNC 14
+Adrian Autry UNC 14
+Ky Feldman UNC 14
+Shaun Belbey UNC 14
+Mike Sutton UNC 14
+Evan Dourdas UNC 14
+Jonathan Radner UNC 14
+FIRST_NAME LAST_NAME UNIFORM_NUM
+FIRST_NAME LAST_NAME NAME WINS
+Jaron Blossomgame Clemson 6
+Shelton Mitchell Clemson 6
+Avry Holmes Clemson 6
+Marcquise Reed Clemson 6
+Elijah Thomas Clemson 6
+Donte Grantham Clemson 6
+Gabe DeVoe Clemson 6
+Sidy Djitte Clemson 6
+Scott Spencer Clemson 6
+Legend Robertin Clemson 6
+Isaac Fields Clemson 6
+Ty Hudson Clemson 6
+Lyles Davis Clemson 6
+Riley McGillan Clemson 6
+Luke Kennard Duke 11
+Jayson Tatum Duke 11
+Grayson Allen Duke 11
+Frank Jackson Duke 11
+Amile Jefferson Duke 11
+Matt Jones Duke 11
+Harry Giles Duke 11
+Chase Jeter Duke 11
+Antonio Vrankovic Duke 11
+Jack White Duke 11
+Javin DeLaurier Duke 11
+Marques Bolden Duke 11
+Justin Robinson Duke 11
+Nick Pagliuca Duke 11
+Brennan Besser Duke 11
+Dwayne Bacon FloridaState 12
+Jonathan Isaac FloridaState 12
+Xavier Rathan-Mayes FloridaState 12
+Terance Mann FloridaState 12
+PJ Savoy FloridaState 12
+Michael Ojo FloridaState 12
+Trent Forrest FloridaState 12
+CJ Walker FloridaState 12
+Braian Angola FloridaState 12
+Jarquez Smith FloridaState 12
+Christ Koumadje FloridaState 12
+Brandon Allen FloridaState 12
+Phil Cofer FloridaState 12
+Josh Okogie GeorgiaTech 8
+Ben Lammers GeorgiaTech 8
+Tadric Jackson GeorgiaTech 8
+Quinton Stephens GeorgiaTech 8
+Josh Heath GeorgiaTech 8
+Justin Moore GeorgiaTech 8
+Christian Matthews GeorgiaTech 8
+Corey Heyward GeorgiaTech 8
+Sylvester Ogbonda GeorgiaTech 8
+Kellen McCormick GeorgiaTech 8
+Abdoulaye Gueye GeorgiaTech 8
+Shaheed Medlock GeorgiaTech 8
+Norman Harris GeorgiaTech 8
+Jodan Price GeorgiaTech 8
+Rand Rowland GeorgiaTech 8
+Donovan Mitchell Louisville 12
+Quentin Snider Louisville 12
+Deng Adel Louisville 12
+Jaylen Johnson Louisville 12
+Mangok Mathiang Louisville 12
+Ray Spalding Louisville 12
+Anas Mahmoud Louisville 12
+V.J. King Louisville 12
+Tony Hicks Louisville 12
+Ryan McMahon Louisville 12
+David Levitch Louisville 12
+Matz Stockman Louisville 12
+Jay Henderson Louisville 12
+Tyler Sharpe Louisville 12
+Davon Reed Miami 10
+Ja'Quan Newton Miami 10
+Bruce BrownJr. Miami 10
+Kamari Murphy Miami 10
+Anthony LawrenceII Miami 10
+Dejan Vasiljevic Miami 10
+Dewan Huell Miami 10
+Ebuka Izundu Miami 10
+Rodney MillerJr. Miami 10
+Mike Robinson Miami 10
+Chris Stowell Miami 10
+Justin Jackson NotreDame 12
+Joel BerryII NotreDame 12
+Kennedy Meeks NotreDame 12
+Isaiah Hicks NotreDame 12
+Tony Bradley NotreDame 12
+Kenny Williams NotreDame 12
+Theo Pinson NotreDame 12
+Luke Maye NotreDame 12
+Nate Britt NotreDame 12
+Brandon Robinson NotreDame 12
+Seventh Woods NotreDame 12
+Stilman White NotreDame 12
+Shea Rush NotreDame 12
+Kanler Coker NotreDame 12
+Aaron Rohlman NotreDame 12
+Mike Young Syracuse 10
+Jamel Artis Syracuse 10
+Cameron Johnson Syracuse 10
+Sheldon Jeter Syracuse 10
+Chris Jones Syracuse 10
+Ryan Luther Syracuse 10
+Jonathan Milligan Syracuse 10
+Rozelle Nix Syracuse 10
+Justice Kithcart Syracuse 10
+Ryan Seelye Syracuse 10
+Corey Manigault Syracuse 10
+Damon Wilson Syracuse 10
+Zach Smith Syracuse 10
+Andrew WhiteIII UNC 14
+Tyler Lydon UNC 14
+Tyus Battle UNC 14
+John Gillon UNC 14
+Taurean Thompson UNC 14
+DaJuan Coleman UNC 14
+Tyler Roberson UNC 14
+Frank Howard UNC 14
+Paschal Chukwu UNC 14
+Ray Featherston UNC 14
+Doyin Akintobi-Adeyeye UNC 14
+Adrian Autry UNC 14
+Ky Feldman UNC 14
+Shaun Belbey UNC 14
+Mike Sutton UNC 14
+Evan Dourdas UNC 14
+Jonathan Radner UNC 14
+London Perrantes Virginia 11
+Austin Nichols Virginia 11
+Marial Shayok Virginia 11
+Devon Hall Virginia 11
+Kyle Guy Virginia 11
+Isaiah Wilkins Virginia 11
+Darius Thompson Virginia 11
+Ty Jerome Virginia 11
+Jarred Reuter Virginia 11
+Mamadi Diakite Virginia 11
+Jack Salt Virginia 11
+Justice Bartley Virginia 11
+Jeff Jones Virginia 11
+Trevon GrossJr. Virginia 11
+Zach LeDay VirginiaTech 10
+Seth Allen VirginiaTech 10
+Chris Clarke VirginiaTech 10
+Ahmed Hill VirginiaTech 10
+Justin Robinson VirginiaTech 10
+Justin Bibbs VirginiaTech 10
+Ty Outlaw VirginiaTech 10
+Khadim Sy VirginiaTech 10
+Johnny Hamilton VirginiaTech 10
+Matt Galloway VirginiaTech 10
+Greg Donlon VirginiaTech 10
+John Collins WakeForest 9
+Bryant Crawford WakeForest 9
+Keyshawn Woods WakeForest 9
+Konstantinos Mitoglou WakeForest 9
+Austin Arians WakeForest 9
+Mitchell Wilbekin WakeForest 9
+Brandon Childress WakeForest 9
+Doral Moore WakeForest 9
+Greg McClinton WakeForest 9
+Donovan Mitchell WakeForest 9
+Sam Japhet-Mathias WakeForest 9
+Aaron Spivey WakeForest 9
+Troy Rike WakeForest 9
+Trent VanHorn WakeForest 9
+Rich Washington WakeForest 9
+Anthony Bilas WakeForest 9
+Britton Anderson WakeForest 9
