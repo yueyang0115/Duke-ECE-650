@@ -51,7 +51,6 @@ PLAYER_ID TEAM_ID UNIFORM_NUM FIRST_NAME LAST_NAME MPG PPG RPG APG SPG BPG
 195 15 20 John Collins 27 19 10 1 0.6 1.6
 198 15 44 Konstantinos Mitoglou 25 9 6 1 0.6 0.7
 NAME
-Miami
 FIRST_NAME LAST_NAME
 Luke Kennard
 Jayson Tatum
@@ -65,9 +64,9 @@ Antonio Vrankovic
 Jack White
 Javin DeLaurier
 Marques Bolden
+Brennan Besser
 Justin Robinson
 Nick Pagliuca
-Brennan Besser
 FIRST_NAME LAST_NAME UNIFORM_NUM
 Jerome Robinson 1
 Ky Bowman 0
@@ -84,6 +83,7 @@ Ervins Meznieks 10
 Gordon Gehan 20
 Aser Ghebremichael 14
 Matt DiLuccio 22
+aaa bbb 60
 FIRST_NAME LAST_NAME NAME WINS
 Andrew WhiteIII UNC 14
 Tyler Lydon UNC 14
