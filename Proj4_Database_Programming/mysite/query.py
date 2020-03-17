@@ -69,16 +69,16 @@ def query5(num_wins):
     return
 
 def main():
-   query1(1, 35, 40, 0, 0, 0, 0, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-   query1(0, 35, 40, 0, 0, 0, 1, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-   query2("Green");
-   query3("Duke");
+   query1(1, 35, 40, 0, 0, 0, 0, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+   query1(0, 35, 40, 0, 0, 0, 1, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+   query2("Green")
+   query3("Duke")
    query4("MA", "Maroon")
-   query5(13);
-   add_player(1, 60, "aaa", "bbb", 20, 20, 10, 10, 5.0, 5.0);
-   add_team("myteam", 10, 3, 20, 0);
-   add_state("N/A");
-   add_color("Pink");
+   query5(13)
+   add_player(1, 60, "aaa", "bbb", 20, 20, 10, 10, 5.0, 5.0)
+   add_team("myteam", 10, 3, 20, 0)
+   add_state("N/A")
+   add_color("Pink")
    return
 
 if __name__ == "__main__":
