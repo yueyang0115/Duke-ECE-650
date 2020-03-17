@@ -40,22 +40,23 @@ def query1(use_mpg, min_mpg, max_mpg, use_ppg, min_ppg, max_ppg, use_rpg, min_rp
          print(player)
     return
 
-def query2(team_color):
-    ans = Team.objects.filter(color_id__name = team_color)
+def query2(teamcolor):
+    #ans = Team.objects.filter(color_id__name = teamcolor)
+    ans = Team.objects.raw('SELECT TEAM_ID, TEAM.NAME FROM TEAM, COLOR WHERE TEAM.COLOR_ID = COLOR.COLOR_ID AND COLOR.NAME = %s', [teamcolor])
     print("NAME")
     for team in ans:
         print(team.name)
     return
 
-def query3(team_name):
-    ans = Player.objects.filter(team_id__name = team_name).order_by('-ppg')
+def query3(teamname):
+    ans = Player.objects.filter(team_id__name = teamname).order_by('-ppg')
     print("FIRST_NAME LAST_NAME")
     for player in ans:
         print(player.first_name, player.last_name)
     return
 
-def query4(team_state, team_color):
-    ans = Player.objects.raw('SELECT PLAYER_ID, FIRST_NAME, LAST_NAME, UNIFORM_NUM FROM PLAYER, STATE, COLOR, TEAM WHERE PLAYER.TEAM_ID = TEAM.TEAM_ID AND TEAM.COLOR_ID = COLOR.COLOR_ID AND TEAM.STATE_ID = STATE.STATE_ID AND STATE.NAME = %s AND COLOR.NAME = %s', [team_state, team_color])
+def query4(teamstate, teamcolor):
+    ans = Player.objects.raw('SELECT PLAYER_ID, FIRST_NAME, LAST_NAME, UNIFORM_NUM FROM PLAYER, STATE, COLOR, TEAM WHERE PLAYER.TEAM_ID = TEAM.TEAM_ID AND TEAM.COLOR_ID = COLOR.COLOR_ID AND TEAM.STATE_ID = STATE.STATE_ID AND STATE.NAME = %s AND COLOR.NAME = %s', [teamstate, teamcolor])
     print("FIRST_NAME LAST_NAME UNIFORM_NUM")
     for player in ans:
         print(player.first_name, player.last_name, player.uniform_num)
@@ -72,13 +73,17 @@ def main():
    query1(1, 35, 40, 0, 0, 0, 0, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)
    query1(0, 35, 40, 0, 0, 0, 1, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0)
    query2("Green")
+   query2("Orange")
    query3("Duke")
+   query3("UNC")
    query4("MA", "Maroon")
+   query4("NC","DarkBlue")
    query5(13)
-   add_player(1, 60, "aaa", "bbb", 20, 20, 10, 10, 5.0, 5.0)
-   add_team("myteam", 10, 3, 20, 0)
-   add_state("N/A")
-   add_color("Pink")
+   query5(10)
+   #add_player(1, 60, "aaa", "bbb", 20, 20, 10, 10, 5.0, 5.0)
+   #add_team("myteam", 10, 3, 20, 0)
+   #add_state("N/A")
+   #add_color("Pink")
    return
 
 if __name__ == "__main__":
