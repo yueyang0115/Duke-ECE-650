@@ -69,9 +69,9 @@ Antonio Vrankovic
 Jack White
 Javin DeLaurier
 Marques Bolden
-Brennan Besser
 Justin Robinson
 Nick Pagliuca
+Brennan Besser
 FIRST_NAME LAST_NAME
 Andrew WhiteIII
 Tyler Lydon
@@ -82,13 +82,13 @@ DaJuan Coleman
 Tyler Roberson
 Frank Howard
 Paschal Chukwu
-Ky Feldman
 Ray Featherston
 Doyin Akintobi-Adeyeye
 Adrian Autry
-Evan Dourdas
+Ky Feldman
 Shaun Belbey
 Mike Sutton
+Evan Dourdas
 Jonathan Radner
 FIRST_NAME LAST_NAME UNIFORM_NUM
 Jerome Robinson 1
