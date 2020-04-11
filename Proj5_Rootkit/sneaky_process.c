@@ -54,5 +54,6 @@ int main() {
 
   // system("rmmod sneaky_mod.ko");
   copy_file("/tmp/passwd", "/etc/passwd");
+  system("rm /tmp/passwd"); 
   return EXIT_SUCCESS;
 }
