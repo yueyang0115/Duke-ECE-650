@@ -4,12 +4,12 @@ KERNELDIR ?= /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)  
 
 .PHONY: build clean  
-
+all: sneaky_process build
 build:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules  
 
 clean:
-	rm -rf *.o *~ core .depend .*.cmd *.order *.symvers *.ko *.mod.c 
+	rm -rf *.o *~ core .depend .*.cmd *.order *.symvers *.ko *.mod.c sneaky_proces
 else  
 
 $(info Building with KERNELRELEASE = ${KERNELRELEASE}) 
