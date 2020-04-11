@@ -9,6 +9,7 @@
 #include <linux/module.h>  // for all modules
 #include <linux/sched.h>
 
+MODULE_LICENSE("GPL");
 //Macros for kernel functions to alter Control Register 0 (CR0)
 //This CPU has the 0-bit of CR0 set to 1: protected mode is enabled.
 //Bit 0 is the WP-bit (write protection). We want to flip this to 0
