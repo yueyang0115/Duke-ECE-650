@@ -1,0 +1,1 @@
+cmd_/home/yy258/ece650/Duke-ECE-650/Proj5_Rootkit/sneaky_mod.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/yy258/ece650/Duke-ECE-650/Proj5_Rootkit/sneaky_mod.ko /home/yy258/ece650/Duke-ECE-650/Proj5_Rootkit/sneaky_mod.o /home/yy258/ece650/Duke-ECE-650/Proj5_Rootkit/sneaky_mod.mod.o
