@@ -11,7 +11,7 @@ def createState():
     file = open("state.txt")
     for line in file:
         state_id,name = line.split(' ')
-        State.objects.get_or_create(name = name)
+        State.objects.get_or_create(name = name[0:-1])
     file.close()
     return
 
@@ -19,7 +19,7 @@ def createColor():
     file = open("color.txt")
     for line in file:
         color_id,name = line.split(' ')
-        Color.objects.get_or_create(name = name)
+        Color.objects.get_or_create(name = name[0:-1])
     file.close()
     return
 

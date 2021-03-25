@@ -41,8 +41,7 @@ def query1(use_mpg, min_mpg, max_mpg, use_ppg, min_ppg, max_ppg, use_rpg, min_rp
     return
 
 def query2(teamcolor):
-    #ans = Team.objects.filter(color_id__name = teamcolor)
-    ans = Team.objects.raw('SELECT TEAM_ID, TEAM.NAME FROM TEAM, COLOR WHERE TEAM.COLOR_ID = COLOR.COLOR_ID AND COLOR.NAME = %s', [teamcolor])
+    ans = Team.objects.filter(color_id__name = teamcolor)
     print("NAME")
     for team in ans:
         print(team.name)
@@ -56,7 +55,7 @@ def query3(teamname):
     return
 
 def query4(teamstate, teamcolor):
-    ans = Player.objects.raw('SELECT PLAYER_ID, FIRST_NAME, LAST_NAME, UNIFORM_NUM FROM PLAYER, STATE, COLOR, TEAM WHERE PLAYER.TEAM_ID = TEAM.TEAM_ID AND TEAM.COLOR_ID = COLOR.COLOR_ID AND TEAM.STATE_ID = STATE.STATE_ID AND STATE.NAME = %s AND COLOR.NAME = %s', [teamstate, teamcolor])
+    ans = Player.objects.filter(team_id__state_id__name = teamstate).filter(team_id__color_id__name = teamcolor)
     print("FIRST_NAME LAST_NAME UNIFORM_NUM")
     for player in ans:
         print(player.first_name, player.last_name, player.uniform_num)
